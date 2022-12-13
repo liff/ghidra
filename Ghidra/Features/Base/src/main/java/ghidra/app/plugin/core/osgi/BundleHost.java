@@ -358,7 +358,7 @@ public class BundleHost {
 	 * @return the path
 	 */
 	public static Path getOsgiDir() {
-		Path usersettings = Application.getUserSettingsDirectory().toPath();
+		Path usersettings = Application.getUserStateDirectory().toPath();
 		return usersettings.resolve("osgi");
 	}
 
@@ -368,7 +368,8 @@ public class BundleHost {
 	 * @return the directory
 	 */
 	private static Path getCacheDir() {
-		return BundleHost.getOsgiDir().resolve("felixcache");
+		Path userCache = Application.getUserCacheDirectory().toPath();
+		return userCache.resolve("felix");
 	}
 
 	private static String makeCacheDir() throws IOException {
