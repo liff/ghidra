@@ -24,6 +24,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+import dev.dirs.UserDirectories;
 import generic.jar.ResourceFile;
 import ghidra.app.plugin.core.osgi.BundleHost;
 import ghidra.app.plugin.core.osgi.OSGiException;
@@ -157,7 +158,8 @@ public class GhidraScriptUtil {
 	 */
 	private static String buildUserScriptsDirectory() {
 
-		String root = System.getProperty("user.home");
+		UserDirectories dirs = UserDirectories.get();
+		String root = dirs.documentDir;
 		String override = System.getProperty(GhidraScriptConstants.USER_SCRIPTS_DIR_PROPERTY);
 		if (override != null) {
 			Msg.debug(GhidraScriptUtil.class, "Using Ghidra script source directory: " + root);

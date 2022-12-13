@@ -19,6 +19,7 @@ import java.io.*;
 import java.text.ParseException;
 import java.util.*;
 
+import dev.dirs.UserDirectories;
 import org.eclipse.core.resources.*;
 import org.eclipse.core.runtime.*;
 import org.eclipse.jdt.core.*;
@@ -33,7 +34,7 @@ import ghidradev.Activator;
 public class GhidraScriptUtils {
 
 	public static File userScriptsDir =
-		new File(System.getProperty("user.home") + "/ghidra_scripts");
+		new File(UserDirectories.get().documentDir, "ghidra_scripts");
 
 	/**
 	 * Creates a new Ghidra script project with the given name.
