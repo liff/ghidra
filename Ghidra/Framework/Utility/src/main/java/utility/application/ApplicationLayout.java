@@ -39,6 +39,7 @@ public abstract class ApplicationLayout {
 	protected ResourceFile applicationInstallationDir;
 	protected Map<String, GModule> modules;
 	protected File userTempDir;
+	protected File userStateDir;
 	protected File userCacheDir;
 	protected File userLogDir;
 	protected File userSettingsDir;
@@ -90,6 +91,16 @@ public abstract class ApplicationLayout {
 	public final File getUserTempDir() {
 		return userTempDir;
 	}
+
+	/**
+	 * Gets the user state directory from the application layout.
+	 *
+	 * @return The user state directory (or null if not set).
+ 	*/
+	public final File getUserStateDir() {
+		return userStateDir;
+	}
+
 
 	/**
 	 * Gets the user log directory from the application layout.

@@ -351,7 +351,7 @@ public class ToolUtils {
 	 * @return the path
 	 */
 	public static String getApplicationToolDirPath() {
-		String userSettingsPath = Application.getUserSettingsDirectory().getAbsolutePath();
-		return userSettingsPath + File.separatorChar + ProjectManager.APPLICATION_TOOLS_DIR_NAME;
+		String userStatePath = Application.getUserStateDirectory().getAbsolutePath();
+		return userStatePath + File.separatorChar + ProjectManager.APPLICATION_TOOLS_DIR_NAME;
 	}
 }

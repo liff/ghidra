@@ -138,6 +138,21 @@ public class ApplicationUtilities {
 	}
 
 	/**
+	 * Gets the default application's user state directory.
+	 *
+	 * @param applicationProperties The application properties.
+	 * @return The default application's user state directory.
+	 */
+	public static File getDefaultUserStateDir(ApplicationProperties applicationProperties) {
+		ApplicationIdentifier applicationIdentifier =
+				new ApplicationIdentifier(applicationProperties);
+
+		ProjectDirectories dirs = getProjectDirectories(applicationIdentifier.getApplicationName());
+
+		return new File(dirs.dataDir);
+	}
+
+	/**
 	 * Gets the default application's user temp directory.
 	 * 
 	 * @param applicationProperties The application properties.

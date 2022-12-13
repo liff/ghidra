@@ -619,6 +619,15 @@ public class Application {
 	}
 
 	/**
+	 * Returns the File containing the user state for this application.
+	 * @return the File containing the user state for this application.
+	 */
+	public static File getUserStateDirectory() {
+		checkAppInitialized();
+		return app.layout.getUserStateDir();
+	}
+
+	/**
 	 * Returns the temporary directory specific to the user and the application.
 	 * Directory has name of &lt;username&gt;-&lt;appname&gt;
 	 * This directory may be removed at system reboot or during periodic
