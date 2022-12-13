@@ -154,15 +154,17 @@ public class ApplicationUtilities {
 			SystemUtilities.getUserName() + "-" + applicationProperties.getApplicationName());
 	}
 
+	public static ProjectDirectories getProjectDirectories(String applicationName) {
+		return ProjectDirectories.from("gov", "NSA", applicationName);
+	}
+
 	/**
 	 * Gets the default application's user cache directory.
 	 * 
 	 * @param applicationProperties The application properties.
 	 * @return The default application's user cache directory.
-	 * @throws FileNotFoundException if the user cache directory could not be determined.
 	 */
-	public static File getDefaultUserCacheDir(ApplicationProperties applicationProperties)
-			throws FileNotFoundException {
+	public static File getDefaultUserCacheDir(ApplicationProperties applicationProperties) {
 
 		// Look for preset cache directory
 		String cachedir = System.getProperty("application.cachedir", "").trim();
@@ -171,33 +173,12 @@ public class ApplicationUtilities {
 				SystemUtilities.getUserName() + "-" + applicationProperties.getApplicationName());
 		}
 
-		// Handle Windows specially
-		if (OperatingSystem.CURRENT_OPERATING_SYSTEM == OperatingSystem.WINDOWS) {
-			File localAppDataDir = null;
-			String localAppDataDirPath = System.getenv("LOCALAPPDATA"); // e.g., /Users/myname/AppData/Local
-			if (localAppDataDirPath != null && !localAppDataDirPath.isEmpty()) {
-				localAppDataDir = new File(localAppDataDirPath);
-			}
-			else {
-				String userHome = System.getProperty("user.home");
-				if (userHome != null) {
-					localAppDataDir = new File(userHome, "AppData\\Local");
-					if (!localAppDataDir.isDirectory()) {
-						localAppDataDir = new File(userHome, "Local Settings");
-					}
-				}
-			}
-			if (localAppDataDir != null && localAppDataDir.isDirectory()) {
-				return new File(localAppDataDir, applicationProperties.getApplicationName());
-			}
-		}
+		ApplicationIdentifier applicationIdentifier =
+				new ApplicationIdentifier(applicationProperties);
 
-		// Use user temp directory if platform specific scheme does not exist above or it failed
-		return getDefaultUserTempDir(applicationProperties);
-	}
+		ProjectDirectories dirs = getProjectDirectories(applicationIdentifier.getApplicationName());
 
-	public static ProjectDirectories getProjectDirectories(String applicationName) {
-		return ProjectDirectories.from("gov", "NSA", applicationName);
+		return new File(dirs.cacheDir);
 	}
 
 	/**
