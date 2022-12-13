@@ -81,15 +81,15 @@ public class GenericRunInfo {
 	private static List<File> collectAllApplicationDirectories(File dataDirectoryParentDir) {
 
 		String settingsDirPrefix =
-			"." + Application.getName().replaceAll("\\s", "").toLowerCase();
+			Application.getName().replaceAll("\\s", "").toLowerCase();
 		FileFilter userDirFilter = f -> {
 			String name = f.getName();
 			return f.isDirectory() && name.startsWith(settingsDirPrefix) &&
 				!name.endsWith(TEST_DIRECTORY_SUFFIX);
 		};
 
-		// The current directory structure--rooted under '.<application name>'.   For example,
-		// /some/path/<user home>/.application_name/..application_name_application-version
+		// The current directory structure--rooted under '$XDG_CONFIG_HOME/<application name>'.
+		// For example, /some/path/<user home>/.config/ghidra/application-version
 		File[] userDirs = dataDirectoryParentDir.listFiles(userDirFilter);
 		return CollectionUtils.asList(userDirs);
 	}

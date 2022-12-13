@@ -19,6 +19,7 @@ import java.io.*;
 import java.util.ArrayList;
 import java.util.Collection;
 
+import dev.dirs.ProjectDirectories;
 import generic.jar.ResourceFile;
 import ghidra.framework.*;
 import ghidra.util.Msg;
@@ -195,29 +196,28 @@ public class ApplicationUtilities {
 		return getDefaultUserTempDir(applicationProperties);
 	}
 
+	public static ProjectDirectories getProjectDirectories(String applicationName) {
+		return ProjectDirectories.from("gov", "NSA", applicationName);
+	}
+
 	/**
 	 * Gets the default application's user settings directory.
 	 * 
 	 * @param applicationProperties The application properties.
 	 * @param installationDirectory The application installation directory.
 	 * @return The application's user settings directory.
-	 * @throws FileNotFoundException if the user settings directory could not be determined.
 	 */
 	public static File getDefaultUserSettingsDir(ApplicationProperties applicationProperties,
-			ResourceFile installationDirectory) throws FileNotFoundException {
-
-		String homedir = System.getProperty("user.home");
-		if (homedir == null || homedir.isEmpty()) {
-			throw new FileNotFoundException("System property \"user.home\" is not set!");
-		}
+			ResourceFile installationDirectory) {
 
 		ApplicationIdentifier applicationIdentifier =
 			new ApplicationIdentifier(applicationProperties);
 
-		File userSettingsParentDir =
-			new File(homedir, "." + applicationIdentifier.getApplicationName());
+		ProjectDirectories dirs = getProjectDirectories(applicationIdentifier.getApplicationName());
 
-		String userSettingsDirName = "." + applicationIdentifier;
+		File userSettingsParentDir = new File(dirs.configDir);
+
+		String userSettingsDirName = applicationIdentifier.toString();
 
 		if (SystemUtilities.isInDevelopmentMode()) {
 			// Add the application's installation directory name to this variable, so that each 
