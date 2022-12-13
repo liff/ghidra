@@ -167,10 +167,10 @@ public class Application {
 		app.loggingInitialized = true;
 
 		if (logFile == null) {
-			logFile = new File(app.layout.getUserSettingsDir(), "application.log");
+			logFile = new File(app.layout.getUserLogDir(), "application.log");
 		}
 		if (scriptLogFile == null) {
-			scriptLogFile = new File(app.layout.getUserSettingsDir(), "script.log");
+			scriptLogFile = new File(app.layout.getUserLogDir(), "script.log");
 		}
 
 		LoggingInitialization.setApplicationLogFile(logFile);

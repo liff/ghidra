@@ -55,6 +55,7 @@ public class GhidraApplicationLayout extends ApplicationLayout {
 		// User directories
 		userTempDir = ApplicationUtilities.getDefaultUserTempDir(getApplicationProperties());
 		userCacheDir = ApplicationUtilities.getDefaultUserCacheDir(getApplicationProperties());
+		userLogDir = ApplicationUtilities.getDefaultUserLogDir(getApplicationProperties());
 		userSettingsDir = ApplicationUtilities.getDefaultUserSettingsDir(getApplicationProperties(),
 			getApplicationInstallationDir());
 
@@ -98,6 +99,7 @@ public class GhidraApplicationLayout extends ApplicationLayout {
 		// User directories
 		userTempDir = ApplicationUtilities.getDefaultUserTempDir(getApplicationProperties());
 		userCacheDir = ApplicationUtilities.getDefaultUserCacheDir(getApplicationProperties());
+		userLogDir = ApplicationUtilities.getDefaultUserLogDir(getApplicationProperties());
 		userSettingsDir = ApplicationUtilities.getDefaultUserSettingsDir(getApplicationProperties(),
 			getApplicationInstallationDir());
 

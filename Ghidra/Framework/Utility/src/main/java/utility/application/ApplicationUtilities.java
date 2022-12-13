@@ -159,6 +159,21 @@ public class ApplicationUtilities {
 	}
 
 	/**
+	 * Gets the default application's user log directory.
+	 *
+	 * @param applicationProperties The application properties.
+	 * @return The default application's user cache directory.
+	 */
+	public static File getDefaultUserLogDir(ApplicationProperties applicationProperties) {
+		ApplicationIdentifier applicationIdentifier =
+				new ApplicationIdentifier(applicationProperties);
+
+		ProjectDirectories dirs = getProjectDirectories(applicationIdentifier.getApplicationName());
+
+		return new File(dirs.cacheDir, "logs");
+	}
+
+	/**
 	 * Gets the default application's user cache directory.
 	 * 
 	 * @param applicationProperties The application properties.

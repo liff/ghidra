@@ -40,6 +40,7 @@ public abstract class ApplicationLayout {
 	protected Map<String, GModule> modules;
 	protected File userTempDir;
 	protected File userCacheDir;
+	protected File userLogDir;
 	protected File userSettingsDir;
 	protected ResourceFile patchDir;
 	protected ResourceFile extensionArchiveDir;
@@ -88,6 +89,15 @@ public abstract class ApplicationLayout {
 	 */
 	public final File getUserTempDir() {
 		return userTempDir;
+	}
+
+	/**
+	 * Gets the user log directory from the application layout.
+	 *
+	 * @return The user log directory (or null if not set).
+	 */
+	public final File getUserLogDir() {
+		return userLogDir;
 	}
 
 	/**
@@ -149,6 +159,13 @@ public abstract class ApplicationLayout {
 				throw new IOException("Failed to create user temp directory: " + userTempDir);
 			}
 			FileUtilities.setOwnerOnlyPermissions(userTempDir);
+		}
+
+		if (userLogDir != null) {
+			if (!FileUtilities.mkdirs(userLogDir)) {
+				throw new IOException("Failed to create user log directory: " + userLogDir);
+			}
+			FileUtilities.setOwnerOnlyPermissions(userLogDir);
 		}
 
 		if (userCacheDir != null) {
