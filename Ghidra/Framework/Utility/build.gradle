@@ -21,3 +21,7 @@ apply from: "$rootProject.projectDir/gradle/javadoc.gradle"
 apply plugin: 'eclipse'
 
 eclipse.project.name = 'Framework Utility'
+
+dependencies {
+    api 'dev.dirs:directories:26'
+}
